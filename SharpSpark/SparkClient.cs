@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using EventSource4Net;
+using Newtonsoft.Json;
 using SharpSpark.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,10 @@ namespace Maybe5.SharpSpark
         {
             var result = CloudPost(functionKey, args);
             return result;
+        }
+
+        public EventSource GetEventStream() {
+            return CloudApiClient.GetRawResultForEventStream();
         }
 
         public T GetVariableReturnValue<T>(string variableName)

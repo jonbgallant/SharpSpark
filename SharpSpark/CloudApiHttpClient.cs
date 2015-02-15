@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EventSource4Net;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 
@@ -47,6 +48,10 @@ namespace Maybe5.SharpSpark
                 return client.PostAsync(String.Format("https://api.spark.io/v1/devices/{0}/{1}?access_token={2}", DeviceId, functionKey, AccessToken), content).Result;
                 
             }
+        }
+
+        public EventSource GetRawResultForEventStream() {
+            return new EventSource(new Uri(String.Format("https://api.spark.io/v1/devices/{0}/events?access_token={1}", DeviceId, AccessToken)), TIMEOUT_SECONDS * 1000);
         }
     }
 }
